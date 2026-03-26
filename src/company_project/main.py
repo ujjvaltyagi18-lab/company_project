@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlmodel import Session, select
-from .model import Address, Company, Employee, Salary, Tax, Course, Seat, Student, Registration, Discount, Penality, Fees, Payment, Certification, Placement, Package, Batch, Attendance, Assignment, Result, Inquiry
+from .model import Address, Company, Employee, Salary, Tax, Course, Seat, Student, Registration, Discount, Penality, Fees, Payment, Certification, Placement, Package, Batch, Attendance, Assignment, Result, Inquiry, Feedback
 from .database import get_session
 
 
@@ -45,7 +45,7 @@ def delete_Address(session: Session=Depends(get_session)):
 def update_Address(data: Address, session: Session=Depends(get_session)):
   address=session.exec(select(Address)).all()
   if not address:
-    raise HTTPException(sstatus_code=404, detail="Address not found")
+    raise HTTPException(status_code=404, detail="Address not found")
   update_data=data.dict(exclude_unset=True)
   for a in address:
     for key, value in update_data.items():
@@ -108,7 +108,7 @@ def delete_Company(session: Session=Depends(get_session)):
 def update_Company(data: Company, session: Session=Depends(get_session)):
   company=session.exec(select(Company)).all()
   if not company:
-    raise HTTPException(sstatus_code=404, detail="Company not found")
+    raise HTTPException(status_code=404, detail="Company not found")
   update_data=data.dict(exclude_unset=True)
   for c in company:
     for key, value in update_data.items():
@@ -170,7 +170,7 @@ def delete_Employee(session: Session=Depends(get_session)):
 def update_Employee(data: Employee, session: Session=Depends(get_session)):
   employee=session.exec(select(Employee)).all()
   if not employee:
-    raise HTTPException(sstatus_code=404, detail="Employee not found")
+    raise HTTPException(status_code=404, detail="Employee not found")
   update_data=data.dict(exclude_unset=True)
   for e in employee:
     for key, value in update_data.items():
@@ -232,7 +232,7 @@ def delete_Salary(session: Session=Depends(get_session)):
 def update_Salary(data: Salary, session: Session=Depends(get_session)):
   salary=session.exec(select(Salary)).all()
   if not salary:
-    raise HTTPException(sstatus_code=404, detail="Salary not found")
+    raise HTTPException(status_code=404, detail="Salary not found")
   update_data=data.dict(exclude_unset=True)
   for s in salary:
     for key, value in update_data.items():
@@ -295,7 +295,7 @@ def delete_Tax(session: Session=Depends(get_session)):
 def update_Tax(data: Tax, session: Session=Depends(get_session)):
   tax=session.exec(select(Tax)).all()
   if not tax:
-    raise HTTPException(sstatus_code=404, detail="Tax not found")
+    raise HTTPException(status_code=404, detail="Tax not found")
   update_data=data.dict(exclude_unset=True)
   for t in tax:
     for key, value in update_data.items():
@@ -357,7 +357,7 @@ def delete_Course(session: Session=Depends(get_session)):
 def update_Course(data: Course, session: Session=Depends(get_session)):
   course=session.exec(select(Course)).all()
   if not course:
-    raise HTTPException(sstatus_code=404, detail="Course not found")
+    raise HTTPException(status_code=404, detail="Course not found")
   update_data=data.dict(exclude_unset=True)
   for c in course:
     for key, value in update_data.items():
@@ -420,7 +420,7 @@ def delete_Seat(session: Session=Depends(get_session)):
 def update_Seat(data: Seat, session: Session=Depends(get_session)):
   seat=session.exec(select(Seat)).all()
   if not seat:
-    raise HTTPException(sstatus_code=404, detail="Seat not found")
+    raise HTTPException(status_code=404, detail="Seat not found")
   update_data=data.dict(exclude_unset=True)
   for s in seat:
     for key, value in update_data.items():
@@ -482,7 +482,7 @@ def delete_Student(session: Session=Depends(get_session)):
 def update_Student(data: Student, session: Session=Depends(get_session)):
   student=session.exec(select(Student)).all()
   if not student:
-    raise HTTPException(sstatus_code=404, detail="Student not found")
+    raise HTTPException(status_code=404, detail="Student not found")
   update_data=data.dict(exclude_unset=True)
   for s in student:
     for key, value in update_data.items():
@@ -544,7 +544,7 @@ def delete_Registration(session: Session=Depends(get_session)):
 def update_Student(data: Registration, session: Session=Depends(get_session)):
   registration=session.exec(select(Registration)).all()
   if not registration:
-    raise HTTPException(sstatus_code=404, detail="Registration not found")
+    raise HTTPException(status_code=404, detail="Registration not found")
   update_data=data.dict(exclude_unset=True)
   for r in registration:
     for key, value in update_data.items():
@@ -606,7 +606,7 @@ def delete_Discount(session: Session=Depends(get_session)):
 def update_Discount(data: Discount, session: Session=Depends(get_session)):
   discount=session.exec(select(Discount)).all()
   if not discount:
-    raise HTTPException(sstatus_code=404, detail="Discount not found")
+    raise HTTPException(status_code=404, detail="Discount not found")
   update_data=data.dict(exclude_unset=True)
   for d in discount:
     for key, value in update_data.items():
@@ -668,7 +668,7 @@ def delete_Penality(session: Session=Depends(get_session)):
 def update_Penality(data: Penality, session: Session=Depends(get_session)):
   penality=session.exec(select(Penality)).all()
   if not penality:
-    raise HTTPException(sstatus_code=404, detail="Penality not found")
+    raise HTTPException(status_code=404, detail="Penality not found")
   update_data=data.dict(exclude_unset=True)
   for p in penality:
     for key, value in update_data.items():
@@ -730,7 +730,7 @@ def delete_Fees(session: Session=Depends(get_session)):
 def update_Fees(data: Fees, session: Session=Depends(get_session)):
   fees=session.exec(select(Fees)).all()
   if not fees:
-    raise HTTPException(sstatus_code=404, detail="Fees not found")
+    raise HTTPException(status_code=404, detail="Fees not found")
   update_data=data.dict(exclude_unset=True)
   for f in fees:
     for key, value in update_data.items():
@@ -792,7 +792,7 @@ def delete_Payment(session: Session=Depends(get_session)):
 def update_Fees(data: Payment, session: Session=Depends(get_session)):
   payment=session.exec(select(Payment)).all()
   if not payment:
-    raise HTTPException(sstatus_code=404, detail="Payment not found")
+    raise HTTPException(status_code=404, detail="Payment not found")
   update_data=data.dict(exclude_unset=True)
   for p in payment:
     for key, value in update_data.items():
@@ -854,7 +854,7 @@ def delete_Certification(session: Session=Depends(get_session)):
 def update_Certification(data: Certification, session: Session=Depends(get_session)):
   certification=session.exec(select(Certification)).all()
   if not certification:
-    raise HTTPException(sstatus_code=404, detail="Certification not found")
+    raise HTTPException(status_code=404, detail="Certification not found")
   update_data=data.dict(exclude_unset=True)
   for c in certification:
     for key, value in update_data.items():
@@ -916,7 +916,7 @@ def delete_Placement(session: Session=Depends(get_session)):
 def update_Placement(data: Placement, session: Session=Depends(get_session)):
   placement=session.exec(select(Placement)).all()
   if not placement:
-    raise HTTPException(sstatus_code=404, detail="Placement not found")
+    raise HTTPException(status_code=404, detail="Placement not found")
   update_data=data.dict(exclude_unset=True)
   for p in placement:
     for key, value in update_data.items():
@@ -978,7 +978,7 @@ def delete_Package(session: Session=Depends(get_session)):
 def update_Package(data: Package, session: Session=Depends(get_session)):
   package=session.exec(select(Package)).all()
   if not package:
-    raise HTTPException(sstatus_code=404, detail="Package not found")
+    raise HTTPException(status_code=404, detail="Package not found")
   update_data=data.dict(exclude_unset=True)
   for p in package:
     for key, value in update_data.items():
@@ -1040,7 +1040,7 @@ def delete_Batch(session: Session=Depends(get_session)):
 def update_Batch(data: Batch, session: Session=Depends(get_session)):
   batch=session.exec(select(Batch)).all()
   if not batch:
-    raise HTTPException(sstatus_code=404, detail="Batch not found")
+    raise HTTPException(status_code=404, detail="Batch not found")
   update_data=data.dict(exclude_unset=True)
   for b in batch:
     for key, value in update_data.items():
@@ -1102,7 +1102,7 @@ def delete_Attendance(session: Session=Depends(get_session)):
 def update_Attendance(data: Attendance, session: Session=Depends(get_session)):
   attendance=session.exec(select(Attendance)).all()
   if not attendance:
-    raise HTTPException(sstatus_code=404, detail="Attendance not found")
+    raise HTTPException(status_code=404, detail="Attendance not found")
   update_data=data.dict(exclude_unset=True)
   for a in attendance:
     for key, value in update_data.items():
@@ -1164,7 +1164,7 @@ def delete_Assignment(session: Session=Depends(get_session)):
 def update_Assignment(data: Assignment, session: Session=Depends(get_session)):
   assignment=session.exec(select(Assignment)).all()
   if not assignment:
-    raise HTTPException(sstatus_code=404, detail="Assignment not found")
+    raise HTTPException(status_code=404, detail="Assignment not found")
   update_data=data.dict(exclude_unset=True)
   for a in assignment:
     for key, value in update_data.items():
@@ -1226,7 +1226,7 @@ def delete_Result(session: Session=Depends(get_session)):
 def update_Result(data: Result, session: Session=Depends(get_session)):
   result=session.exec(select(Result)).all()
   if not result:
-    raise HTTPException(sstatus_code=404, detail="Result not found")
+    raise HTTPException(status_code=404, detail="Result not found")
   update_data=data.dict(exclude_unset=True)
   for r in result:
     for key, value in update_data.items():
@@ -1288,7 +1288,7 @@ def delete_Inquiry(session: Session=Depends(get_session)):
 def update_Inquiry(data: Inquiry, session: Session=Depends(get_session)):
   inquiry=session.exec(select(Inquiry)).all()
   if not inquiry:
-    raise HTTPException(sstatus_code=404, detail="Inquiry not found")
+    raise HTTPException(status_code=404, detail="Inquiry not found")
   update_data=data.dict(exclude_unset=True)
   for i in inquiry:
     for key, value in update_data.items():
@@ -1310,3 +1310,65 @@ def update_Inquiry(inquiry_id: int, data: Inquiry, session: Session=Depends(get_
   session.commit()
   session.refresh(inquiry)
   return inquiry
+
+
+@app.post("/Feedback/")
+def create_Feedback(feedback: Feedback, session: Session=Depends(get_session)):
+  session.add(feedback)
+  session.commit()
+  session.refresh(feedback)
+  return feedback
+
+@app.get("/Feedback/")
+def get_Feedback(session: Session=Depends(get_session)):
+  feedback= session.exec(select(Feedback)).all()
+  return feedback
+
+@app.get("/Feedback/{feedback_id}")
+def get_Feedback_by_id(feedback_id: int, session: Session=Depends(get_session)):
+  feedback= session.get(Feedback, feedback_id)
+  return feedback
+
+@app.delete("/Feedback/{feedback_id}", status_code=204)
+def delete_Feedback_by_id(feedback_id: int, session: Session=Depends(get_session)):
+  feedback = session.get(Feedback, feedback_id)
+  if not feedback:
+    raise HTTPException(status_code=404, detail="Feedback not found")
+  session.delete(feedback)
+  session.commit()
+  return {"detail": f"Feedback {feedback_id} deleted"}
+
+@app.delete("/Feedback", status_code=204)
+def delete_Feedback(session: Session=Depends(get_session)):
+  feedback = session.exec(select(Feedback)).all()
+  for feedback in feedback:
+    session.delete(feedback)
+    session.commit()
+  return {"detail": "All Feedback deleted"}
+
+@app.put("/Feedback/")
+def update_Feedback(data: Feedback, session: Session=Depends(get_session)):
+  feedback=session.exec(select(Feedback)).all()
+  if not feedback:
+    raise HTTPException(status_code=404, detail="Feedback not found")
+  update_data=data.dict(exclude_unset=True)
+  for f in feedback:
+    for key, value in update_data.items():
+      setattr(f, key, value)
+  session.commit()
+
+  for f in feedback:
+    session.refresh(f)
+  return f
+
+@app.put("/Feedback/{feedback_id}")
+def update_Feedback(feedback_id: int, data: Feedback, session: Session=Depends(get_session)):
+  feedback= session.get(Feedback, feedback_id)
+  if not feedback:
+    raise HTTPException(status_code=404, detail="Feedback not found")
+  
+  for key, value in data.dict(exclude_unset=True).items():
+    setattr(feedback, key, value)
+  session.commit()
+  session.refresh(feedback)
+  return feedback
