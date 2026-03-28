@@ -2,6 +2,18 @@ from fastapi import FastAPI, Depends, HTTPException
 from sqlmodel import Session, select
 from .model import Address, Company, Employee, Salary, Tax, Course, Seat, Student, Registration, Discount, Penality, Fees, Payment, Certification, Placement, Package, Batch, Attendance, Assignment, Result, Inquiry, Feedback
 from .database import get_session
+from passlib.context import CryptContext
+
+pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
+
+def hash_password(password: str) -> str:
+  return pwd_context.hash(password)
+
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+  """
+  Returns True if plain_password matches the hashed_password.
+  """
+  return pwd_context.verify(plain_password, hashed_password)
 
 
 app=FastAPI()
@@ -134,10 +146,26 @@ def update_Company(company_id: int, data: Company, session: Session=Depends(get_
 
 @app.post("/Employee/")
 def create_Employee(employee: Employee, session: Session=Depends(get_session)):
-  session.add(employee)
+  new_user = Employee(
+    id=employee.id,
+    email=employee.email,
+    name=employee.name,
+    password=hash_password(employee.password),
+    phone=employee.phone,
+    address_id=employee.address_id,
+    bgv=employee.bgv,
+    qualification=employee.qualification,
+    experience=employee.experience,
+    specialization=employee.specialization,
+    work_location=employee.work_location,
+    company_id=employee.company_id,
+    designation=employee.designation
+
+  )
+  session.add(new_user)
   session.commit()
-  session.refresh(employee)
-  return employee
+  session.refresh(new_user)
+  return new_user
 
 @app.get("/Employee/")
 def get_Employee(session: Session=Depends(get_session)):
@@ -1372,3 +1400,11 @@ def update_Feedback(feedback_id: int, data: Feedback, session: Session=Depends(g
   session.commit()
   session.refresh(feedback)
   return feedback
+
+
+@app.post("/login")
+def login(user: Employee, session: Session=Depends(get_session)):
+  db_user = session.exec(select(Employee).where(Employee.email == user.email)).first()
+  if not db_user or not verify_password(user.password, db_user.password):
+    raise HTTPException(status_code=401, detail="Invalid credentials")
+  return {"message": "Login successful", "user_id": db_user.id, "user_name":db_user.name}

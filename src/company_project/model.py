@@ -27,6 +27,7 @@ class Company(SQLModel, table=True):
   type: str | None=Field(default=None)
   opening_time: time | None=Field(default=None)
   closing_time: time | None=Field(default=None)
+  total_hiring: int | None=Field(default=None)
 
 
 class Employee(SQLModel, table=True):
@@ -70,10 +71,9 @@ class Course(SQLModel, table=True):
   name: str | None=Field(default=None)
   duration: str | None=Field(default=None)
   type: str | None=Field(default=None)
-  status: str | None=Field(default=None)
-  timing: time | None=Field(default=None)
+  status: bool | None=Field(default=None)
   company_id: int | None=Field(default=None, foreign_key="company.id")
-  company:  Company | None=Relationship()
+  company: Company | None=Relationship()
 
 
 class Seat(SQLModel, table=True):
@@ -110,7 +110,7 @@ class Registration(SQLModel, table=True):
   course_id: int | None=Field(default=None, foreign_key="course.id")
   course: Course | None=Relationship()
   company_id: int | None=Field(default=None, foreign_key="company.id")
-  company:  Company | None=Relationship()
+  company: Company | None=Relationship()
   payment_amount: int | None=Field(default=None)
 
 
@@ -132,7 +132,7 @@ class Penality(SQLModel, table=True):
   student_id: int | None=Field(default=None, foreign_key="student.id")
   student: Student | None=Relationship()
   amount: int | None=Field(default=None)
-  status: str | None=Field(default=None)
+  status: bool | None=Field(default=None)
 
 
 class Fees(SQLModel, table=True):
@@ -158,7 +158,7 @@ class Payment(SQLModel, table=True):
   type: str | None=Field(default=None)
   method: str | None=Field(default=None)
   payment_time: time | None=Field(default=None)
-  status: str | None=Field(default=None)
+  status: bool | None=Field(default=None)
 
 
 class Certification(SQLModel, table=True):
@@ -170,7 +170,7 @@ class Certification(SQLModel, table=True):
   course_id: int | None=Field(default=None, foreign_key="course.id")
   course: Course | None=Relationship()
   company_id: int | None=Field(default=None, foreign_key="company.id")
-  company:  Company | None=Relationship()
+  company: Company | None=Relationship()
 
 
 class Placement(SQLModel, table=True):
@@ -181,8 +181,7 @@ class Placement(SQLModel, table=True):
   course_id: int | None=Field(default=None, foreign_key="course.id")
   course: Course | None=Relationship()
   company_id: int | None=Field(default=None, foreign_key="company.id")
-  company:  Company | None=Relationship()
-  total_hiring: int | None=Field(default=None)
+  company: Company | None=Relationship()
   designation: str | None=Field(default=None)
 
 
@@ -218,7 +217,7 @@ class Attendance(SQLModel, table=True):
   batch_id: int | None=Field(default=None, foreign_key="batch.id")
   batch: Batch | None=Relationship()
   date: date | None=Field(default=None)
-  status: str| None=Field(default=None)
+  status: bool | None=Field(default=None)
 
 
 class Assignment(SQLModel, table=True):
@@ -246,7 +245,7 @@ class Inquiry(SQLModel, table=True):
   name: str | None=Field(default=None)
   phone: str | None=Field(default=None)
   course_interest: str | None=Field(default=None)
-  status: str | None=Field(default=None)
+  status: bool | None=Field(default=None)
 
 
 class Feedback(SQLModel, table=True):
@@ -257,7 +256,7 @@ class Feedback(SQLModel, table=True):
   course_id: int | None=Field(default=None, foreign_key="course.id")
   course: Course | None=Relationship()
   company_id: int | None=Field(default=None, foreign_key="company.id")
-  company:  Company | None=Relationship()
+  company: Company | None=Relationship()
   text: str | None=Field(default=None)
   rating: int | None=Field(default=None)
   created_at: datetime | None=Field(default=None)
