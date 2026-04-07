@@ -260,3 +260,6 @@ class Feedback(SQLModel, table=True):
   text: str | None=Field(default=None)
   rating: int | None=Field(default=None)
   created_at: datetime | None=Field(default=None)
+
+
+class company_no
